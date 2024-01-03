@@ -4,3 +4,24 @@
   align-items: center;
   height: 100vh;
 }
+
+.left-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.right-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.gender-row {
+  display: flex;
+  flex-direction: column;
+}
