@@ -18,6 +18,7 @@ body {
   height: 50vh;
   border: 2px solid black;
   box-sizing: border-box;
+  background-color: white;
 }
 
 .left-column {
