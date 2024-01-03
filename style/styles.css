@@ -1,3 +1,10 @@
+body {
+  background-image: url('Background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
 .box{
   display: flex;
   justify-content: center;
