@@ -1,8 +1,16 @@
-.container {
+.box{
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  border: 2px solid black;
+  box-sizing: border-box;
 }
 
 .left-column {
@@ -30,7 +38,11 @@
   margin-right: 10px;
 }
 
-button {
+input {
+  margin: 10px;
+}
+
+button{
   margin: 10px;
 }
 
