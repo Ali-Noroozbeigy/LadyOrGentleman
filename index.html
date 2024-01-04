@@ -10,7 +10,7 @@
         <div class="container">
             <div class="left-column">
               <h2>Mr. or Ms. ?</h2>
-              <form>
+              <form id="nameForm">
                       <label for="name">Name:</label>
                       <input type="text" id="name" name="name" required pattern="[A-Za-z ]{1,255}">
 
@@ -30,13 +30,48 @@
 
                       <input type="submit" value="Submit">
               </form>
+                <script>
+                      document.getElementById("nameForm").addEventListener("submit", function(event) {
+                        event.preventDefault();
+                        var name = document.getElementById("name").value;
+                        var apiUrl = "https://api.genderize.io/?name=" + encodeURIComponent(name);
+
+                        fetch(apiUrl)
+                          .then(response => response.json())
+                          .then(data => {
+                            // Handle the API response here
+                            var gender = document.getElementById("gender");
+                            var prob = document.getElementById("prob");
+                            if (data.gender && data.probability){
+                                gender.textContent = data.gender;
+                                prob.textContent = data.probability;
+                            }
+                            else if(data.gender){
+                                gender.textContent = data.gender;
+                                prob.textContent = "Unknown";
+                            }
+                            else if (data.probability){
+                                gender.textContent = "Unknown";
+                                prob.textContent = data.probability;
+                            }
+                            else{
+                                gender.textContent = "Unknown";
+                                prob.textContent = "Unknown";
+                            }
+                          })
+                          .catch(error => {
+                            // Handle any errors
+                            console.error(error);
+                          });
+                      });
+                </script>
               <input type="submit" value="Save">
             </div>
 
             <div class="right-column">
               <h2>Prediction</h2>
-              <p>Male</p>
-              <p>0.97</p>
+              <p id="gender">Gender</p>
+              <p id="prob">Probability</p>
               <h2>Saved Answer</h2>
               <button>Clear</button>
             </div>
