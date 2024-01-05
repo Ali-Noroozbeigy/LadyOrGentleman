@@ -65,15 +65,48 @@
                           });
                       });
                 </script>
-              <input type="submit" value="Save">
+              <input type="submit" id="saveButton" value="Save">
+              <script>
+                  document.getElementById("saveButton").addEventListener("click", function(event) {
+                    event.preventDefault();
+
+                    var name = document.getElementById("name").value;
+                    var gender = document.getElementById("gender").value;
+                    var genderRadios = document.getElementsByName("gender");
+                    var selectedGender = "";
+
+                    var isGenderSelected = false;
+                    for (var i = 0; i < genderRadios.length; i++) {
+                      if (genderRadios[i].checked) {
+                        selectedGender = genderRadios[i].value;
+                        isGenderSelected = true;
+                        break;
+                      }
+                    }
+
+                    if (!isGenderSelected) {
+                      if (!gender.toLowerCase() === "gender" && !genderr.toLowerCase() === "unknown"){
+                          localStorage.setItem(name, gender);
+                          console.log(gender);
+                          alert("Data saved successfully with prediction!");
+                          return;
+                      }
+                      alert("There is no data to save!");
+                      return;
+                    }
+
+                    localStorage.setItem(name, selectedGender);
+                    alert("Data saved successfully with radio buttons!");
+                  });
+              </script>
             </div>
 
             <div class="right-column">
               <h2>Prediction</h2>
               <p id="gender">Gender</p>
               <p id="prob">Probability</p>
-              <h2>Saved Answer</h2>
-              <button>Clear</button>
+              <h2 id="saved-answer" style="display: none;">Saved Answer</h2>
+              <button id="clear-button" style="display: none;">Clear</button>
             </div>
         </div>
     </div>
