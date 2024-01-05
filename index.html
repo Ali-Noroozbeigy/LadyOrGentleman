@@ -63,9 +63,10 @@
                             // Handle any errors
                             console.error(error);
                           });
-                        if (localStorage.getItem(name)){
+                        var savedGender = localStorage.getItem(name);
+                        if (savedGender){
                             document.getElementById("saved-answer").style.display = "block";
-                            document.getElementById("saved-answer").textContent = name;
+                            document.getElementById("saved-answer").textContent = "Saved Answer: " + savedGender;
                             document.getElementById("clear-button").style.display = "block";
                         }else{
                             document.getElementById("saved-answer").style.display = "none";
@@ -79,7 +80,7 @@
                     event.preventDefault();
 
                     var name = document.getElementById("name").value;
-                    var gender = document.getElementById("gender").value;
+                    var gender = document.getElementById("gender").textContent;
                     var genderRadios = document.getElementsByName("gender");
                     var selectedGender = "";
 
@@ -93,10 +94,12 @@
                     }
 
                     if (!isGenderSelected) {
-                      if (!gender.toLowerCase() === "gender" && !genderr.toLowerCase() === "unknown"){
+                      if (gender.toLowerCase() !== "gender" && gender.toLowerCase() !== "unknown"){
                           localStorage.setItem(name, gender);
-                          console.log(gender);
                           alert("Data saved successfully with prediction!");
+                          document.getElementById("saved-answer").style.display = "block";
+                          document.getElementById("saved-answer").textContent = "Saved Answer: " + gender;
+                          document.getElementById("clear-button").style.display = "block";
                           return;
                       }
                       alert("There is no data to save!");
@@ -105,6 +108,9 @@
 
                     localStorage.setItem(name, selectedGender);
                     alert("Data saved successfully with user knowledge!");
+                    document.getElementById("saved-answer").style.display = "block";
+                    document.getElementById("saved-answer").textContent = "Saved Answer: " + selectedGender;
+                    document.getElementById("clear-button").style.display = "block";
                   });
               </script>
             </div>
