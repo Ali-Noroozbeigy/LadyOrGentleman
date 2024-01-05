@@ -76,3 +76,16 @@ function saveHandler(event){
     document.getElementById("saved-answer").textContent = "Saved Answer: " + selectedGender;
     document.getElementById("clear-button").style.display = "block";
 }
+
+function clearHandler(event){
+    event.preventDefault();
+    var name = document.getElementById("name").value;
+    if (!name){
+        alert("No name to clear!");
+        return;
+    }
+    localStorage.removeItem(name);
+    document.getElementById("saved-answer").style.display = "none";
+    document.getElementById("clear-button").style.display = "none"
+    alert("Data removed successfully!")
+}

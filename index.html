@@ -48,18 +48,7 @@
               <button id="clear-button" style="display: none;">Clear</button>
             </div>
             <script>
-                document.getElementById("clear-button").addEventListener("click", function(event) {
-                    event.preventDefault();
-                    var name = document.getElementById("name").value;
-                    if (!name){
-                        alert("No name to clear!");
-                        return;
-                    }
-                    localStorage.removeItem(name);
-                    document.getElementById("saved-answer").style.display = "none";
-                    document.getElementById("clear-button").style.display = "none"
-                    alert("Data removed successfully!")
-                  });
+                document.getElementById("clear-button").addEventListener("click", clearHandler);
             </script>
         </div>
     </div>
