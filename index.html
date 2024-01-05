@@ -30,14 +30,7 @@
 
                       <input type="submit" value="Submit">
               </form>
-              <script src="scripts.js"></script>
-              <script>
-                    document.getElementById("nameForm").addEventListener("submit", submitHandler);
-              </script>
               <input type="submit" id="saveButton" value="Save">
-              <script>
-                  document.getElementById("saveButton").addEventListener("click", saveHandler);
-              </script>
             </div>
 
             <div class="right-column">
@@ -47,10 +40,13 @@
               <h2 id="saved-answer" style="display: none;">Saved Answer</h2>
               <button id="clear-button" style="display: none;">Clear</button>
             </div>
-            <script>
-                document.getElementById("clear-button").addEventListener("click", clearHandler);
-            </script>
         </div>
     </div>
+<script src="scripts.js"></script>
+<script>
+    document.getElementById("nameForm").addEventListener("submit", submitHandler);
+    document.getElementById("saveButton").addEventListener("click", saveHandler);
+    document.getElementById("clear-button").addEventListener("click", clearHandler);
+</script>
 </body>
 </html>
