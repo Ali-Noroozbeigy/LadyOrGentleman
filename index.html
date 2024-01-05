@@ -63,6 +63,14 @@
                             // Handle any errors
                             console.error(error);
                           });
+                        if (localStorage.getItem(name)){
+                            document.getElementById("saved-answer").style.display = "block";
+                            document.getElementById("saved-answer").textContent = name;
+                            document.getElementById("clear-button").style.display = "block";
+                        }else{
+                            document.getElementById("saved-answer").style.display = "none";
+                            document.getElementById("clear-button").style.display = "none"
+                        }
                       });
                 </script>
               <input type="submit" id="saveButton" value="Save">
