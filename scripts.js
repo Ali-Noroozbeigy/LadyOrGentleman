@@ -40,3 +40,39 @@ function submitHandler(event){
         document.getElementById("clear-button").style.display = "none"
     }
 }
+
+function saveHandler(event){
+    event.preventDefault();
+    var name = document.getElementById("name").value;
+    var gender = document.getElementById("gender").textContent;
+    var genderRadios = document.getElementsByName("gender");
+    var selectedGender = "";
+
+    var isGenderSelected = false;
+    for (var i = 0; i < genderRadios.length; i++) {
+      if (genderRadios[i].checked) {
+        selectedGender = genderRadios[i].value;
+        isGenderSelected = true;
+        break;
+      }
+    }
+
+    if (!isGenderSelected) {
+      if (gender.toLowerCase() !== "gender" && gender.toLowerCase() !== "unknown"){
+          localStorage.setItem(name, gender);
+          alert("Data saved successfully with prediction!");
+          document.getElementById("saved-answer").style.display = "block";
+          document.getElementById("saved-answer").textContent = "Saved Answer: " + gender;
+          document.getElementById("clear-button").style.display = "block";
+          return;
+      }
+      alert("There is no data to save!");
+      return;
+    }
+
+    localStorage.setItem(name, selectedGender);
+    alert("Data saved successfully with user knowledge!");
+    document.getElementById("saved-answer").style.display = "block";
+    document.getElementById("saved-answer").textContent = "Saved Answer: " + selectedGender;
+    document.getElementById("clear-button").style.display = "block";
+}
