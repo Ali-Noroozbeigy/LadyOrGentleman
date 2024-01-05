@@ -1,8 +1,5 @@
-function submitHandler(event){
-    event.preventDefault();
-    var name = document.getElementById("name").value;
+function showPrediction(name){
     var apiUrl = "https://api.genderize.io/?name=" + encodeURIComponent(name);
-
     fetch(apiUrl)
       .then(response => response.json())
       .then(data => {
@@ -30,20 +27,35 @@ function submitHandler(event){
         // Handle any errors
         console.error(error);
       });
-    var savedGender = localStorage.getItem(name);
-    if (savedGender){
-        document.getElementById("saved-answer").style.display = "block";
-        document.getElementById("saved-answer").textContent = "Saved Answer: " + savedGender;
-        document.getElementById("clear-button").style.display = "block";
-    }else{
-        document.getElementById("saved-answer").style.display = "none";
-        document.getElementById("clear-button").style.display = "none"
-    }
 }
 
-function saveHandler(event){
+function makeVisible(savedGender){
+    document.getElementById("saved-answer").style.display = "block";
+    document.getElementById("saved-answer").textContent = "Saved Answer: " + savedGender;
+    document.getElementById("clear-button").style.display = "block";
+}
+
+function makeInvisible(){
+    document.getElementById("saved-answer").style.display = "none";
+    document.getElementById("clear-button").style.display = "none";
+}
+
+function showSavedAnswer(name){
+    var savedGender = localStorage.getItem(name);
+    if (savedGender){
+        makeVisible(savedGender);
+    }else{
+        makeInvisible();
+    }
+}
+function submitHandler(event){
     event.preventDefault();
     var name = document.getElementById("name").value;
+    showPrediction(name);
+    showSavedAnswer(name);
+}
+
+function saveGender(name){
     var gender = document.getElementById("gender").textContent;
     var genderRadios = document.getElementsByName("gender");
     var selectedGender = "";
@@ -58,12 +70,10 @@ function saveHandler(event){
     }
 
     if (!isGenderSelected) {
-      if (gender.toLowerCase() !== "gender" && gender.toLowerCase() !== "unknown"){
+      if (gender.toLowerCase() !== "unknown"){
           localStorage.setItem(name, gender);
+          showSavedAnswer(name);
           alert("Data saved successfully with prediction!");
-          document.getElementById("saved-answer").style.display = "block";
-          document.getElementById("saved-answer").textContent = "Saved Answer: " + gender;
-          document.getElementById("clear-button").style.display = "block";
           return;
       }
       alert("There is no data to save!");
@@ -71,10 +81,20 @@ function saveHandler(event){
     }
 
     localStorage.setItem(name, selectedGender);
+    showSavedAnswer(name);
     alert("Data saved successfully with user knowledge!");
-    document.getElementById("saved-answer").style.display = "block";
-    document.getElementById("saved-answer").textContent = "Saved Answer: " + selectedGender;
-    document.getElementById("clear-button").style.display = "block";
+}
+
+function saveHandler(event){
+    event.preventDefault();
+    var name = document.getElementById("name").value;
+    if (!name){
+        alert("No name to save!");
+        return;
+    }
+
+    showPrediction(name);
+    saveGender(name);
 }
 
 function clearHandler(event){
@@ -85,7 +105,6 @@ function clearHandler(event){
         return;
     }
     localStorage.removeItem(name);
-    document.getElementById("saved-answer").style.display = "none";
-    document.getElementById("clear-button").style.display = "none"
+    makeInvisible();
     alert("Data removed successfully!")
 }
