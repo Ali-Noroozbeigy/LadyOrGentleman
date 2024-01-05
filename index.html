@@ -104,7 +104,7 @@
                     }
 
                     localStorage.setItem(name, selectedGender);
-                    alert("Data saved successfully with radio buttons!");
+                    alert("Data saved successfully with user knowledge!");
                   });
               </script>
             </div>
@@ -116,6 +116,20 @@
               <h2 id="saved-answer" style="display: none;">Saved Answer</h2>
               <button id="clear-button" style="display: none;">Clear</button>
             </div>
+            <script>
+                document.getElementById("clear-button").addEventListener("click", function(event) {
+                    event.preventDefault();
+                    var name = document.getElementById("name").value;
+                    if (!name){
+                        alert("No name to clear!");
+                        return;
+                    }
+                    localStorage.removeItem(name);
+                    document.getElementById("saved-answer").style.display = "none";
+                    document.getElementById("clear-button").style.display = "none"
+                    alert("Data removed successfully!")
+                  });
+            </script>
         </div>
     </div>
 </body>
