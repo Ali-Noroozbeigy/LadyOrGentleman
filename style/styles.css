@@ -1,3 +1,4 @@
+/*this block sets background, and positions it in the center. if background is small does not repeat it*/
 body {
   background-image: url('Background.jpg');
   background-repeat: no-repeat;
@@ -5,12 +6,15 @@ body {
   background-position: center;
 }
 
+/*make a box in the middle of the page so that we can put the container in it and draw border for it*/
 .box{
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
+
+/*make a container to have two columns in it, position it in center, and draw a border around it*/
 .container {
   display: flex;
   justify-content: center;
@@ -21,6 +25,7 @@ body {
   background-color: rgba(255, 255, 255, 0.85);
 }
 
+/*manages left columns, align items to start (left) and also padding*/
 .left-column {
   display: flex;
   flex-direction: column;
@@ -29,6 +34,8 @@ body {
   padding: 20px;
 }
 
+
+/*manages right columns, align items to start (left) and also padding*/
 .right-column {
   display: flex;
   flex-direction: column;
@@ -37,15 +44,16 @@ body {
   padding: 20px;
 }
 
+/*styles radio buttons*/
 .radio-group {
   display: flex;
   align-items: center;
 }
-
+/*adds margin to label of radio buttons*/
 .radio-group label {
   margin-right: 10px;
 }
-
+/*in these four blocks, we just add some space around components*/
 input {
   margin: 10px;
 }
